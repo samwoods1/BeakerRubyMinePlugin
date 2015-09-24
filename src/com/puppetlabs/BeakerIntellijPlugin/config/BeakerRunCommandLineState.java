@@ -7,7 +7,6 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.command.run.CommandRunConfiguration;
 import org.jetbrains.plugins.ruby.gem.GemUtil;
 import org.jetbrains.plugins.ruby.ruby.run.MergingCommandLineArgumentsProvider;
 import org.jetbrains.plugins.ruby.ruby.run.configuration.RubyAbstractCommandLineState;
@@ -42,7 +41,7 @@ public class BeakerRunCommandLineState extends RubyAbstractCommandLineState {
         String var5 = beakerRunConfiguration.getExecutableName();
         String var6 = GemUtil.getGemExecutableRubyScriptPath(beakerRunConfiguration.getModule(), beakerRunConfigurationSdk, var4, var5);
         if(var6 != null) {
-            GeneralCommandLine var7 = (GeneralCommandLine)rubyCommandLineData.getUserData(RubyCommandLineData.COMMAND_LINE_KEY);
+            GeneralCommandLine var7 = rubyCommandLineData.getUserData(RubyCommandLineData.COMMAND_LINE_KEY);
 
             assert var7 != null;
 

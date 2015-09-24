@@ -10,8 +10,8 @@ import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.util.ui.UIUtil;
-import org.jetbrains.annotations.NotNull;
 import com.puppetlabs.BeakerIntellijPlugin.config.BeakerRunConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,6 +39,7 @@ public class BeakerSettingsEditor extends SettingsEditor<BeakerRunConfiguration>
     private TextFieldWithBrowseButton workingDirectoryTextFieldWithBrowseButton = new TextFieldWithBrowseButton();
     private FileChooserDescriptor workingDirectoryFileChooserDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
     private JBCheckBox useLatestPreservedCheckBox = new JBCheckBox("Use latest preserved for this hosts file?");
+    private JBCheckBox useBundlerCheckBox = new JBCheckBox("Execute with bundle exec?");
 
     public BeakerSettingsEditor(Project project) {
         panel = new JPanel(new GridBagLayout());
@@ -63,7 +64,9 @@ public class BeakerSettingsEditor extends SettingsEditor<BeakerRunConfiguration>
         this.AddProjectFileChooserToPanel(project, testFileLabel, testFileChooserDescriptor, testFileTextFieldWithBrowseButton);
         this.AddFileChooserToPanel(rsaKeyLabel, rsaKeyTextFieldWithBrowseButton, false);
         this.AddFieldToPanel(additionalArgumentsLabel, additionalArgumentsTextField);
-        this.AddProjectFileChooserToPanel(project, workingDirectoryLabel, workingDirectoryFileChooserDescriptor, workingDirectoryTextFieldWithBrowseButton );
+        this.AddProjectFileChooserToPanel(project, workingDirectoryLabel, workingDirectoryFileChooserDescriptor, workingDirectoryTextFieldWithBrowseButton);
+        panel.add(useBundlerCheckBox, getFieldConstraints());
+        verticalIncrementer++;
     }
 
     private void AddFileChooserToPanel(JBLabel chooserLabel, TextFieldWithBrowseButton textFieldWithBrowseButton, boolean hideFiles){
@@ -147,6 +150,7 @@ public class BeakerSettingsEditor extends SettingsEditor<BeakerRunConfiguration>
         additionalArgumentsTextField.setText(runSettings.getAdditionalArguments());
         LOG.debug("working directory = '" + runSettings.getDirectory() + "'");
         workingDirectoryTextFieldWithBrowseButton.getTextField().setText(runSettings.getDirectory());
+        useBundlerCheckBox.setSelected(runSettings.getUseBundler());
     }
 
     @Override
@@ -158,7 +162,8 @@ public class BeakerSettingsEditor extends SettingsEditor<BeakerRunConfiguration>
                 optionsFileTextFieldWithBrowseButton.getTextField().getText(),
                 testFileTextFieldWithBrowseButton.getTextField().getText(),
                 additionalArgumentsTextField.getText(),
-                workingDirectoryTextFieldWithBrowseButton.getTextField().getText());
+                workingDirectoryTextFieldWithBrowseButton.getTextField().getText(),
+                useBundlerCheckBox.isSelected());
     }
 
     @NotNull

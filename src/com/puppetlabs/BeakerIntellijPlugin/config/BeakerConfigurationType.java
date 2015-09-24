@@ -4,9 +4,7 @@ import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.ConfigurationTypeUtil;
 import com.intellij.icons.AllIcons;
-import icons.RubyIcons;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.command.run.CommandRunConfigurationFactory;
 
 import javax.swing.*;
 
@@ -49,7 +47,7 @@ public class BeakerConfigurationType implements ConfigurationType {
 
 
     public static BeakerConfigurationType getInstance() {
-        return (BeakerConfigurationType) ConfigurationTypeUtil.findConfigurationType(BeakerConfigurationType.class);
+        return ConfigurationTypeUtil.findConfigurationType(BeakerConfigurationType.class);
     }
 
     public BeakerConfigurationFactory getFactory() {

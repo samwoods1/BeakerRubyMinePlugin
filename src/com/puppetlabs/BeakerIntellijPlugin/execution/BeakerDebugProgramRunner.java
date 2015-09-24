@@ -1,29 +1,20 @@
 package com.puppetlabs.BeakerIntellijPlugin.execution;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.RunnerAndConfigurationSettings;
-import com.intellij.execution.configurations.ConfigurationTypeUtil;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.puppetlabs.BeakerIntellijPlugin.config.BeakerRunConfiguration;
 import com.puppetlabs.BeakerIntellijPlugin.settings.BeakerRunSettings;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.command.run.CommandRunConfiguration;
-import org.jetbrains.plugins.ruby.command.run.CommandRunConfigurationFactory;
-import org.jetbrains.plugins.ruby.command.run.CommandRunConfigurationType;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.debugger.RubyDebugRunner;
 import org.jetbrains.plugins.ruby.ruby.run.configuration.RubyRunConfigurationType;
 import org.jetbrains.plugins.ruby.ruby.run.configuration.RunConfigurationUtil;
 import org.jetbrains.plugins.ruby.ruby.run.configuration.rubyScript.RubyRunConfiguration;
-
-import java.util.HashMap;
 
 /**
  * Created by samwoods on 9/14/15.

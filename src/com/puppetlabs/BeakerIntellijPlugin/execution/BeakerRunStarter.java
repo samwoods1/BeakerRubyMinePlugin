@@ -36,7 +36,6 @@ public class BeakerRunStarter extends RunProfileStarter {
         }
 
         RunContentBuilder contentBuilder = new RunContentBuilder(executionResult, environment);
-        final RunContentDescriptor descriptor = contentBuilder.showRunContent(environment.getContentToReuse());
-        return descriptor;
+        return contentBuilder.showRunContent(environment.getContentToReuse());
     }
 }

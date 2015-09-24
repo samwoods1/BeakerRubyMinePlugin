@@ -1,23 +1,20 @@
 package com.puppetlabs.BeakerIntellijPlugin.config;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.*;
+import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.JDOMExternalizer;
 import com.intellij.openapi.util.WriteExternalException;
-import com.intellij.openapi.util.text.StringUtil;
-import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
 import com.puppetlabs.BeakerIntellijPlugin.execution.BeakerRunProfileState;
 import com.puppetlabs.BeakerIntellijPlugin.settings.BeakerRunSettings;
 import com.puppetlabs.BeakerIntellijPlugin.settings.BeakerSettingsEditor;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.command.run.CommandRunCommandLineState;
-import org.jetbrains.plugins.ruby.command.run.CommandRunConfigurationParams;
+import org.jdom.Element;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.run.configuration.AbstractRubyRunConfiguration;
 
 import java.nio.file.Path;
@@ -27,10 +24,6 @@ import java.nio.file.Paths;
  * Created by samwoods on 6/11/15.
  */
 public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerRunConfiguration> {
-    public static final String COMMAND_RUN_CONFIGURATION = "COMMAND_RUN_CONFIGURATION";
-    private String h = "";
-    private String i = "";
-    private String j = "";
 
     private BeakerRunSettings runSettings;
 
@@ -53,7 +46,7 @@ public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerR
         return runSettings != null ? runSettings : new BeakerRunSettings();
     }
 
-    public void setRunSettings(String rsaKey, String configFile, Boolean useLatestPreserved, String optionsFile, String testFile, String additionalArguments, String workingDirectory) {
+    public void setRunSettings(String rsaKey, String configFile, Boolean useLatestPreserved, String optionsFile, String testFile, String additionalArguments, String workingDirectory, boolean useBundler) {
         runSettings = new BeakerRunSettings();
         runSettings.setRsaKey(rsaKey);
         runSettings.setConfigFile(configFile);
@@ -62,6 +55,7 @@ public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerR
         runSettings.setTestFilePath(testFile);
         runSettings.setAdditionalArguments(additionalArguments);
         runSettings.setDirectory(workingDirectory);
+        runSettings.setUseBundler(useBundler);
     }
 
     public void setRunSettings(BeakerRunSettings settings){
@@ -89,6 +83,7 @@ public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerR
         settings.setOptionsFile(JDOMExternalizer.readString(element, "optionsFile"));
         settings.setRsaKey(JDOMExternalizer.readString(element, "rsaKey"));
         settings.setUseLatestPreserved(JDOMExternalizer.readBoolean(element, "useLatestPreserved"));
+        settings.setUseBundler(JDOMExternalizer.readBoolean(element, "useBundler"));
         setRunSettings(settings);
     }
 
@@ -110,6 +105,7 @@ public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerR
         JDOMExternalizer.write(element, "optionsFile", runSettings.getOptionsFile());
         JDOMExternalizer.write(element, "rsaKey", runSettings.getRsaKey());
         JDOMExternalizer.write(element, "useLatestPreserved", runSettings.getUseLatestPreserved());
+        JDOMExternalizer.write(element, "useBundler", runSettings.getUseBundler());
     }
 
     @Override
@@ -126,10 +122,6 @@ public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerR
         return "beaker";
     }
 
-//    public void setGemName(String var1) {
-//        this.h = StringUtil.notNullize(var1);
-//    }
-
     public String getExecutableName() {
         return "beaker";
     }
@@ -137,13 +129,5 @@ public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerR
     public String getExecutableArguments() {
         return BeakerRunProfileState.getArgs(this.getRunSettings()).getParametersList().getParametersString();
     }
-
-//    public void setExecutableName(@Nullable String var1) {
-//        this.i = StringUtil.notNullize(var1);
-//    }
-
-//    public void setExecutableArguments(@Nullable String var1) {
-//        this.j = StringUtil.notNullize(var1);
-//    }
 
 }

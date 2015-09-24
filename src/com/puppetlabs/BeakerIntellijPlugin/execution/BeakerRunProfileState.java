@@ -40,10 +40,11 @@ public class BeakerRunProfileState extends CommandLineState {
     }
 
     public GeneralCommandLine getCommandLine(BeakerRunSettings settings) {
-
-
+        String exe = "beaker";
+        if (settings.getUseBundler())
+            exe = "bundle";
         GeneralCommandLine commandLine = getArgs(settings);
-        commandLine.setExePath("beaker");
+        commandLine.setExePath(exe);
         if (settings.getDirectory() != null && settings.getDirectory() != "") {
             if (settings.getDirectory().startsWith("/")) {
                 commandLine.withWorkDirectory(settings.getDirectory());
@@ -60,6 +61,11 @@ public class BeakerRunProfileState extends CommandLineState {
 
     public static GeneralCommandLine getArgs(BeakerRunSettings settings){
         GeneralCommandLine commandLine = new GeneralCommandLine();
+
+        if (settings.getUseBundler()){
+            commandLine.addParameter("exec");
+            commandLine.addParameter("beaker");
+        }
 
         if (settings.getConfigFile() != null && settings.getConfigFile() != "") {
             String configFile = settings.getConfigFile();

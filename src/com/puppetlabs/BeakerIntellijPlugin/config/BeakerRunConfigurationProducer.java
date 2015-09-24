@@ -13,8 +13,8 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ObjectUtils;
-import org.jetbrains.annotations.NotNull;
 import com.puppetlabs.BeakerIntellijPlugin.settings.BeakerRunSettings;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by samwoods on 9/6/15.
