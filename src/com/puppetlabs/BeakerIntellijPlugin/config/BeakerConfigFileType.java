@@ -35,13 +35,13 @@ public class BeakerConfigFileType extends LanguageFileType {
     @NotNull
     @Override
     public String getName() {
-        return "BeakerTestRunner";
+        return "Beaker Test Runner";
     }
 
     @NotNull
     @Override
     public String getDescription() {
-        return "BeakerTestRunner configuration file";
+        return "Beaker Test Runner configuration file";
     }
 
     @NotNull

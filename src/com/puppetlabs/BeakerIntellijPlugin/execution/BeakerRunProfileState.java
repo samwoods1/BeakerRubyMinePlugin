@@ -45,17 +45,7 @@ public class BeakerRunProfileState extends CommandLineState {
             exe = "bundle";
         GeneralCommandLine commandLine = getArgs(settings);
         commandLine.setExePath(exe);
-        if (settings.getDirectory() != null && settings.getDirectory() != "") {
-            if (settings.getDirectory().startsWith("/")) {
-                commandLine.withWorkDirectory(settings.getDirectory());
-            }
-            else {
-                commandLine.withWorkDirectory(Paths.get(config.getProject().getBasePath(), settings.getDirectory()).toAbsolutePath().toString());
-            }
-        }
-        else{
-            commandLine.withWorkDirectory(config.getProject().getBasePath());
-        }
+
         return commandLine;
     }
 
@@ -67,7 +57,7 @@ public class BeakerRunProfileState extends CommandLineState {
             commandLine.addParameter("beaker");
         }
 
-        if (settings.getConfigFile() != null && settings.getConfigFile() != "") {
+        if (settings.getConfigFile() != null && !settings.getConfigFile().isEmpty()) {
             String configFile = settings.getConfigFile();
             if (settings.getUseLatestPreserved()){
                 configFile = getLatestHostsPreserved(configFile);
@@ -77,22 +67,22 @@ public class BeakerRunProfileState extends CommandLineState {
 
         }
 
-        if (settings.getOptionsFile() != null && settings.getOptionsFile() != ""){
+        if (settings.getOptionsFile() != null && !settings.getOptionsFile().isEmpty()){
             commandLine.addParameter("--options-file");
             commandLine.addParameter(settings.getOptionsFile());
         }
 
-        if (settings.getRsaKey() != null && settings.getRsaKey() != ""){
+        if (settings.getRsaKey() != null && !settings.getRsaKey().isEmpty()){
             commandLine.addParameter("--keyfile");
             commandLine.addParameter(settings.getRsaKey());
         }
 
-        if (settings.getTestFilePath() != null && settings.getTestFilePath() != ""){
+        if (settings.getTestFilePath() != null && !settings.getTestFilePath().isEmpty()){
             commandLine.addParameter("--tests");
             commandLine.addParameter(settings.getTestFilePath());
         }
 
-        if (settings.getAdditionalArguments() != null && settings.getAdditionalArguments() != ""){
+        if (settings.getAdditionalArguments() != null && !settings.getAdditionalArguments().isEmpty()){
             for (String param : settings.getAdditionalArguments().split("\\s+")){
                 commandLine.addParameter(param);
             }

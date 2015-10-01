@@ -14,6 +14,8 @@ import org.jetbrains.plugins.ruby.ruby.run.configuration.RubyCommandLineData;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkAdditionalData;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 
+import java.nio.file.Paths;
+
 public class BeakerRunCommandLineState extends RubyAbstractCommandLineState {
     @NonNls
     private static final String e = "ruby.gem.command.runner";
@@ -44,6 +46,17 @@ public class BeakerRunCommandLineState extends RubyAbstractCommandLineState {
             GeneralCommandLine var7 = rubyCommandLineData.getUserData(RubyCommandLineData.COMMAND_LINE_KEY);
 
             assert var7 != null;
+            if (beakerRunConfiguration.getRunSettings().getDirectory() != null && !beakerRunConfiguration.getRunSettings().getDirectory().isEmpty()) {
+                if (beakerRunConfiguration.getRunSettings().getDirectory().startsWith("/") || beakerRunConfiguration.getRunSettings().getDirectory().startsWith("~/")) {
+                    var7.withWorkDirectory(beakerRunConfiguration.getRunSettings().getDirectory());
+                }
+                else {
+                    var7.withWorkDirectory(Paths.get(beakerRunConfiguration.getProject().getBasePath(), beakerRunConfiguration.getRunSettings().getDirectory()).toAbsolutePath().toString());
+                }
+            }
+            else{
+                var7.withWorkDirectory(beakerRunConfiguration.getProject().getBasePath());
+            }
 
             RubySdkAdditionalData var8 = RubySdkUtil.getRubySdkAdditionalData(beakerRunConfigurationSdk);
             ParamsGroup var9 = addExecutionScriptGroup("ruby.gem.command.runner", rubyCommandLineData, var7, var8.getRunner(beakerRunConfiguration.getModule()).addDefaultMappings(beakerRunConfiguration.getMappingSettings()), var8.getSdkSystemAccessor(), var6);

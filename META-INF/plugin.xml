@@ -1,21 +1,21 @@
 <idea-plugin version="2">
-  <name>BeakerTestRunner</name>
-  <description>Beaker test runner com for RubyMine</description>
-  <version>1.0</version>
+  <name>Beaker Test Runner</name>
+  <category>Unit</category>
+  <version>0.1.1</version>
   <vendor email="" url="">Puppet Labs</vendor>
 
   <depends>com.intellij.modules.lang</depends>
+  <depends>com.intellij.modules.ruby</depends>
 
   <description><![CDATA[
       Beaker Test Execution<br>
       For running puppet labs Beaker tests from RubyMine
-    ]]></description>
+    ]]>
+  </description>
 
   <extensions defaultExtensionNs="com.intellij">
     <configurationType implementation="com.puppetlabs.BeakerIntellijPlugin.config.BeakerConfigurationType"/>
     <runConfigurationProducer implementation="com.puppetlabs.BeakerIntellijPlugin.config.BeakerRunConfigurationProducer"/>
-    <programRunner implementation="com.puppetlabs.BeakerIntellijPlugin.execution.BeakerRunProgramRunner"/>
-    <programRunner implementation="com.puppetlabs.BeakerIntellijPlugin.execution.BeakerDebugProgramRunner"/>
     <programRunner implementation="org.jetbrains.plugins.ruby.ruby.debugger.RubyDebugRunner"/>
   </extensions>
 

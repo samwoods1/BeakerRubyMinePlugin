@@ -34,7 +34,7 @@ public class BeakerConfigurationType implements ConfigurationType {
     @NotNull
     @Override
     public String getId() {
-        return "BeakerTestRunner";
+        return "Beaker Test Runner";
     }
 
     @Override
