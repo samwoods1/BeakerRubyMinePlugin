@@ -2,7 +2,7 @@
 An IntelliJ (RubyMine or Idea) Plugin for executing Beaker Tests against PuppetLabs.
 
 # Installation
-Install from https://plugins.jetbrains.com/
+Install from https://plugins.jetbrains.com/plugin/7962?pr=
 In your IntelliJ IDE:
  - Select Preferences 
  - Click Browse repositories button
