@@ -20,7 +20,10 @@
   </extensions>
 
   <change-notes><![CDATA[
-    Initial checkin]]>
+    V0.1.1 10/20/2015
+    - Fixed issues with RubyMine and JDK 1.8
+    - Fixed issues with incorrect discovery of working directory
+    - Fixed issue with blank fields still appending to command line ]]>
   </change-notes>
 
   <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
