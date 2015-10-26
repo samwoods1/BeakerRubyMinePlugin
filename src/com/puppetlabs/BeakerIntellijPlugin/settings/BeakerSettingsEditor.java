@@ -39,7 +39,6 @@ public class BeakerSettingsEditor extends SettingsEditor<BeakerRunConfiguration>
     private TextFieldWithBrowseButton workingDirectoryTextFieldWithBrowseButton = new TextFieldWithBrowseButton();
     private FileChooserDescriptor workingDirectoryFileChooserDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
     private JBCheckBox useLatestPreservedCheckBox = new JBCheckBox("Use latest preserved for this hosts file?");
-    private JBCheckBox useBundlerCheckBox = new JBCheckBox("Execute with bundle exec?");
 
     public BeakerSettingsEditor(Project project) {
         panel = new JPanel(new GridBagLayout());
@@ -65,7 +64,6 @@ public class BeakerSettingsEditor extends SettingsEditor<BeakerRunConfiguration>
         this.AddFileChooserToPanel(rsaKeyLabel, rsaKeyTextFieldWithBrowseButton, false);
         this.AddFieldToPanel(additionalArgumentsLabel, additionalArgumentsTextField);
         this.AddProjectFileChooserToPanel(project, workingDirectoryLabel, workingDirectoryFileChooserDescriptor, workingDirectoryTextFieldWithBrowseButton);
-        panel.add(useBundlerCheckBox, getFieldConstraints());
         verticalIncrementer++;
     }
 
@@ -150,7 +148,6 @@ public class BeakerSettingsEditor extends SettingsEditor<BeakerRunConfiguration>
         additionalArgumentsTextField.setText(runSettings.getAdditionalArguments());
         LOG.debug("working directory = '" + runSettings.getDirectory() + "'");
         workingDirectoryTextFieldWithBrowseButton.getTextField().setText(runSettings.getDirectory());
-        useBundlerCheckBox.setSelected(runSettings.getUseBundler());
     }
 
     @Override
@@ -162,8 +159,7 @@ public class BeakerSettingsEditor extends SettingsEditor<BeakerRunConfiguration>
                 optionsFileTextFieldWithBrowseButton.getTextField().getText(),
                 testFileTextFieldWithBrowseButton.getTextField().getText(),
                 additionalArgumentsTextField.getText(),
-                workingDirectoryTextFieldWithBrowseButton.getTextField().getText(),
-                useBundlerCheckBox.isSelected());
+                workingDirectoryTextFieldWithBrowseButton.getTextField().getText());
     }
 
     @NotNull

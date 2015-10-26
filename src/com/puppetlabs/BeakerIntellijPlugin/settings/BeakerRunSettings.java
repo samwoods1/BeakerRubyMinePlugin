@@ -11,7 +11,6 @@ public class BeakerRunSettings {
     private String testFilePath;
     private String rsaKey;
     private String additionalArguments;
-    private Boolean useBundler;
 
     public BeakerRunSettings(){
         configFile = "hosts.cfg";
@@ -21,7 +20,6 @@ public class BeakerRunSettings {
         testFilePath = "";
         rsaKey = "~/.ssh/id_rsa-acceptance";
         additionalArguments = "";
-        useBundler = false;
     }
 
     public String getConfigFile() {
@@ -52,10 +50,6 @@ public class BeakerRunSettings {
         return rsaKey;
     }
 
-    public Boolean getUseBundler() {
-        return useBundler;
-    }
-
     public void setConfigFile(String myConfigFile) {
         this.configFile = myConfigFile;
     }
@@ -84,7 +78,4 @@ public class BeakerRunSettings {
         this.additionalArguments = additionalArguments;
     }
 
-    public void setUseBundler(Boolean useBundler) {
-        this.useBundler = useBundler;
-    }
 }

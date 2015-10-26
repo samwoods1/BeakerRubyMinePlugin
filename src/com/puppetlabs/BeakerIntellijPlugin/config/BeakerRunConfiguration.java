@@ -10,7 +10,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.JDOMExternalizer;
 import com.intellij.openapi.util.WriteExternalException;
-import com.puppetlabs.BeakerIntellijPlugin.execution.BeakerRunProfileState;
+import com.puppetlabs.BeakerIntellijPlugin.execution.BeakerRunCommandLineState;
 import com.puppetlabs.BeakerIntellijPlugin.settings.BeakerRunSettings;
 import com.puppetlabs.BeakerIntellijPlugin.settings.BeakerSettingsEditor;
 import org.jdom.Element;
@@ -46,7 +46,7 @@ public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerR
         return runSettings != null ? runSettings : new BeakerRunSettings();
     }
 
-    public void setRunSettings(String rsaKey, String configFile, Boolean useLatestPreserved, String optionsFile, String testFile, String additionalArguments, String workingDirectory, boolean useBundler) {
+    public void setRunSettings(String rsaKey, String configFile, Boolean useLatestPreserved, String optionsFile, String testFile, String additionalArguments, String workingDirectory) {
         runSettings = new BeakerRunSettings();
         runSettings.setRsaKey(rsaKey);
         runSettings.setConfigFile(configFile);
@@ -55,7 +55,6 @@ public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerR
         runSettings.setTestFilePath(testFile);
         runSettings.setAdditionalArguments(additionalArguments);
         runSettings.setDirectory(workingDirectory);
-        runSettings.setUseBundler(useBundler);
     }
 
     public void setRunSettings(BeakerRunSettings settings){
@@ -83,7 +82,6 @@ public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerR
         settings.setOptionsFile(JDOMExternalizer.readString(element, "optionsFile"));
         settings.setRsaKey(JDOMExternalizer.readString(element, "rsaKey"));
         settings.setUseLatestPreserved(JDOMExternalizer.readBoolean(element, "useLatestPreserved"));
-        settings.setUseBundler(JDOMExternalizer.readBoolean(element, "useBundler"));
         setRunSettings(settings);
     }
 
@@ -105,7 +103,6 @@ public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerR
         JDOMExternalizer.write(element, "optionsFile", runSettings.getOptionsFile());
         JDOMExternalizer.write(element, "rsaKey", runSettings.getRsaKey());
         JDOMExternalizer.write(element, "useLatestPreserved", runSettings.getUseLatestPreserved());
-        JDOMExternalizer.write(element, "useBundler", runSettings.getUseBundler());
     }
 
     @Override
@@ -127,7 +124,7 @@ public class BeakerRunConfiguration extends AbstractRubyRunConfiguration<BeakerR
     }
 
     public String getExecutableArguments() {
-        return BeakerRunProfileState.getArgs(this.getRunSettings()).getParametersList().getParametersString();
+        return null;
     }
 
 }
