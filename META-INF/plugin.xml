@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <name>Beaker Test Runner</name>
   <category>Unit</category>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <vendor email="" url="">Puppet Labs</vendor>
 
   <depends>com.intellij.modules.lang</depends>
@@ -23,7 +23,9 @@
     V0.1.1 10/20/2015
     - Fixed issues with RubyMine and JDK 1.8
     - Fixed issues with incorrect discovery of working directory
-    - Fixed issue with blank fields still appending to command line ]]>
+    - Fixed issue with blank fields still appending to command line
+    V0.1.2 10/20/2015
+    - Fixed issue with looking for the latest hosts file if it was in a different directory than your working directory. ]]>
   </change-notes>
 
   <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
