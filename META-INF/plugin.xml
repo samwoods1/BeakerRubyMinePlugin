@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <name>Beaker Test Runner</name>
   <category>Unit</category>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
   <vendor email="" url="">Puppet Labs</vendor>
 
   <depends>com.intellij.modules.lang</depends>
@@ -25,11 +25,13 @@
     - Fixed issues with incorrect discovery of working directory
     - Fixed issue with blank fields still appending to command line
     V0.1.2 10/20/2015
-    - Fixed issue with looking for the latest hosts file if it was in a different directory than your working directory. ]]>
+    - Fixed issue with looking for the latest hosts file if it was in a different directory than your working directory.
+    V0.1.2 10/31/2017
+    - Updated for 2017.3 support. ]]>
   </change-notes>
 
   <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-  <idea-version since-build="131"/>
+  <idea-version since-build="173"/>
 
   <application-components>
     <!-- Add your application components here -->
