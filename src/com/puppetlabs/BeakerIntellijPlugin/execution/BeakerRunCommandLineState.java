@@ -9,7 +9,7 @@ import com.puppetlabs.BeakerIntellijPlugin.config.BeakerRunConfiguration;
 import com.puppetlabs.BeakerIntellijPlugin.settings.BeakerRunSettings;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.gem.GemUtil;
+import org.jetbrains.plugins.ruby.gem.RubyGemExecutionContext;
 import org.jetbrains.plugins.ruby.ruby.run.MergingCommandLineArgumentsProvider;
 import org.jetbrains.plugins.ruby.ruby.run.configuration.RubyAbstractCommandLineState;
 import org.jetbrains.plugins.ruby.ruby.run.configuration.RubyCommandLineData;
@@ -46,11 +46,10 @@ public class BeakerRunCommandLineState extends RubyAbstractCommandLineState {
 
         String var4 = beakerRunConfiguration.getGemName();
         String var5 = beakerRunConfiguration.getExecutableName();
-        String var6 = GemUtil.getGemExecutableRubyScriptPath(beakerRunConfiguration.getModule(), beakerRunConfigurationSdk, var4, var5);
+        String var6 = RubyGemExecutionContext.getScriptPath(beakerRunConfigurationSdk, beakerRunConfiguration.getModule(), var4, var5);
         BeakerRunSettings settings = beakerRunConfiguration.getRunSettings();
         if(var6 != null) {
-            GeneralCommandLine var7 = rubyCommandLineData.getUserData(RubyCommandLineData.COMMAND_LINE_KEY);
-
+            GeneralCommandLine var7 = rubyCommandLineData.getCommandLine();
             assert var7 != null;
 
             String workingDir = getWorkingDir(settings, beakerRunConfiguration.getProject().getBasePath());
